@@ -6,7 +6,6 @@ import web.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @Repository

@@ -18,7 +18,26 @@
     <td th:text="${user.getName()}"></td>
     <td th:text="${user.getLastName()}"></td>
     <td th:text="${user.getAge()}"></td>
+
+    <td>
+      <a th:href="@{'/' + ${user.getId()} + '/edit/'}">Edit</a>
+    </td>
+    <td>
+      <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+        <input type="submit" class="link-button" value="Delete"/>
+      </form>
+    </td>
   </tr>
 </table>
+<style>
+  .link-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+</style>
+<a href="/create" style="display: block; margin-top: 20px; font-size: 20px;">Create user</a>
 </body>
 </html>

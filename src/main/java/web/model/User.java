@@ -1,6 +1,7 @@
 package web.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 @Entity
@@ -11,19 +12,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "name", nullable = false)
+    @NotEmpty(message = "Enter field name")
+    @Size(min = 2, max = 30, message = "Name should be between 2 to 30")
     private String name;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
+    @NotEmpty(message = "Enter field last_name")
     private String lastName;
 
-    @Column
-    private int age;
+    @Column(name = "age", nullable = false)
+    @NotNull(message = "Enter field age")
+    @Min(value = 10, message = "min 10")
+    @Max(value = 110, message = "max 110")
+    private Integer age;
 
     public User() {
     }
 
-    public User(Long id, String name, String lastName, int age) {
+    public User(Long id, String name, String lastName, Integer age) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -54,11 +61,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -67,7 +74,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName);
+        return Objects.equals(age, user.age) && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName);
     }
 
     @Override

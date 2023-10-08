@@ -6,18 +6,28 @@
     <title>Edit</title>
 </head>
 <body>
-    <form th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
-        <label for="name">enter name: </label>
-        <label for="lastName">enter last_name: </label>
-        <label for="age">enter age: </label>
-        <input type="text" th:field="*{name}" id="name">
-        <input type="text" th:field="*{lastName}" id="lastName">
-        <input type="number" th:field="*{age}" id="age">
+    <form th:method="PUT" th:action="@{/}" th:object="${user}">
+        <label for="id"><strong style="font-size: 16px;">id:</strong></label><br>
+        <input readonly type="number" th:field="*{id}" id="id"><br><p></p>
 
-        <input type="submit" value="update">
+        <label for="name"><strong style="font-size: 16px;">enter name:</strong></label><br>
+        <input type="text" th:field="*{name}" id="name">
+        <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</div><br><p></p>
+
+        <label for="lastName"><strong style="font-size: 16px;">enter last_name:</strong></label><br>
+        <input type="text" th:field="*{lastName}" id="lastName">
+        <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName error</div><br><p></p>
+
+        <label for="age"><strong style="font-size: 16px;">enter age:</strong></label><br>
+        <input type="number" th:field="*{age}" id="age">
+        <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</div><br><p></p>
+
+
+
+        <input type="submit" value="update"><p></p>
     </form>
 
-    <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+    <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
         <input type="submit" value="delete">
     </form>
 </body>
